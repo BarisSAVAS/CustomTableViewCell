@@ -17,12 +17,27 @@ class CustomTableViewCell: UITableViewCell {
         cellLabel.font = .systemFont(ofSize: 20)
         return cellLabel
     }()
+    let descriptionLabel: UILabel = {
+        let cellLabel = UILabel()
+        cellLabel.text = "Aciklama aciklama aciklama"
+        cellLabel.font = .systemFont(ofSize: 20)
+        return cellLabel
+    }()
+    let myImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named:"image")
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = .systemBackground
         //MARK: Cell Label view a gomuldu
         contentView.addSubview(cellLabel)
+        contentView.addSubview(myImageView)
+        contentView.addSubview(descriptionLabel)
         configure()
     }
     
@@ -38,12 +53,18 @@ class CustomTableViewCell: UITableViewCell {
 //    }
     //MARK: Snapkit ile tasarim yapildi
     func configure(){
-        let cellLabel = cellLabel
-        cellLabel.snp.makeConstraints { make in
-            make.width.equalTo(contentView.snp.width)
-            make.height.equalTo(contentView.snp.height)
-            make.leading.equalTo(contentView.snp.leading).offset(10)
-            make.top.equalTo(contentView.snp.top).inset(-15)
+        myImageView.snp.makeConstraints { make in
+            make.leading.equalTo(contentView.snp.leading).offset(15)
+            make.top.equalTo(contentView.snp.top).offset(10)
         }
+        cellLabel.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(10)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-10)
+        }
+        descriptionLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(contentView.snp.bottom).inset(10)
+            make.trailing.equalTo(cellLabel.snp.trailing)
+        }
+        
     }
 }
